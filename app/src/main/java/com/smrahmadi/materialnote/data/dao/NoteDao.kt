@@ -1,5 +1,6 @@
 package com.smrahmadi.materialnote.data.dao
 
+import androidx.lifecycle.LiveData
 import androidx.room.*
 import com.smrahmadi.materialnote.data.model.Note
 
@@ -12,7 +13,8 @@ interface NoteDao {
     suspend fun update(note: Note)
 
     @Query("SELECT * from note ORDER BY id ASC")
-    fun getAll(): List<Note>
+    fun getAll(): LiveData<List<Note>>
+
 
     @Delete
     suspend fun delete(note: Note)
