@@ -1,7 +1,8 @@
-package com.smrahmadi.materialnote
+package com.smrahmadi.materialnote.view.main
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
+import com.smrahmadi.materialnote.R
 
 class MainActivity : AppCompatActivity() {
 
