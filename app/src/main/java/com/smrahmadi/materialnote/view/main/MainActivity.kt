@@ -5,7 +5,6 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.smrahmadi.materialnote.R
-import com.smrahmadi.materialnote.data.model.Note
 import com.smrahmadi.materialnote.utils.NoteListItemDecoration
 import com.smrahmadi.materialnote.view.main.adapter.NoteListAdapter
 import com.smrahmadi.materialnote.viewmodel.NoteViewModel
