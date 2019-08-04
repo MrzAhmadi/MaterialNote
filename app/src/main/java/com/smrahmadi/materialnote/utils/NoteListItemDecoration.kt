@@ -19,9 +19,9 @@ class NoteListItemDecoration(val margin:Int) : RecyclerView.ItemDecoration() {
             return
 
         if (position == 0)
-            outRect.set(margin, margin, margin, margin)
+            outRect.set(margin, margin*2, margin, 0)
         else if (itemCount > 0 && position == itemCount - 1)
-            outRect.set(margin, margin, margin, margin)
+            outRect.set(margin, margin, margin, margin*2)
         else
             outRect.set(margin, margin, margin, 0)
     }
