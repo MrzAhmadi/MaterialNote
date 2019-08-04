@@ -254,7 +254,5 @@ gradle-app.setting
 # gradle/wrapper/gradle-wrapper.properties
 
 /.idea/misc.xml
-!/.idea/misc.xml
 /.idea/runConfigurations.xml
-!/.idea/runConfigurations.xml
 /.idea/encodings.xml
