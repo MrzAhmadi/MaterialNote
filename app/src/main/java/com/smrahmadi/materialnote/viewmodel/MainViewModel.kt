@@ -10,7 +10,7 @@ import com.smrahmadi.materialnote.data.repository.NoteRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-class NoteViewModel(application: Application) : AndroidViewModel(application) {
+class MainViewModel(application: Application) : AndroidViewModel(application) {
 
     private val repository: NoteRepository
     val allNotes: LiveData<List<Note>>
