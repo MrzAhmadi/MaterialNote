@@ -254,5 +254,3 @@ gradle-app.setting
 # gradle/wrapper/gradle-wrapper.properties
 
 /.idea/
-/.idea/encodings.xml
-/.idea/runConfigurations.xml
