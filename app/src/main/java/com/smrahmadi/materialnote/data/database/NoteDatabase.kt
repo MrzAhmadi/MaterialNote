@@ -23,7 +23,7 @@ abstract class NoteDatabase : RoomDatabase() {
             }
 
         private fun buildDatabase(context: Context) =
-            Room.databaseBuilder(context.applicationContext, NoteDatabase::class.java, "YourDatabase.db")
+            Room.databaseBuilder(context.applicationContext, NoteDatabase::class.java, "Note_database")
                 .addCallback(seedDatabaseCallback(context))
                 .build()
 
