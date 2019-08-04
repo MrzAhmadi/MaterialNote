@@ -12,14 +12,14 @@ interface NoteDao {
     @Update
     suspend fun update(note: Note)
 
-    @Query("SELECT * from note ORDER BY id ASC")
+    @Query("SELECT * from note_table ORDER BY id ASC")
     fun getAll(): LiveData<List<Note>>
 
 
     @Delete
     suspend fun delete(note: Note)
 
-    @Query("DELETE FROM note")
+    @Query("DELETE FROM note_table")
     fun deleteAll()
 
 }
