@@ -4,9 +4,11 @@ import android.graphics.Rect
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView
 
-class NoteListItemDecoration : RecyclerView.ItemDecoration() {
+class NoteListItemDecoration(val margin:Int) : RecyclerView.ItemDecoration() {
     private var position = -1
     private var itemCount = -1
+    
+    
 
     override fun getItemOffsets(outRect: Rect, view: View, parent: RecyclerView, state: RecyclerView.State) {
         super.getItemOffsets(outRect, view, parent, state)
@@ -17,12 +19,10 @@ class NoteListItemDecoration : RecyclerView.ItemDecoration() {
             return
 
         if (position == 0)
-            outRect.set(8, 8, 8, 8);
-
+            outRect.set(margin, margin, margin, margin)
         else if (itemCount > 0 && position == itemCount - 1)
-            outRect.set(8, 8, 8, 8);
-
+            outRect.set(margin, margin, margin, margin)
         else
-            outRect.set(8, 8, 8, 0);
+            outRect.set(margin, margin, margin, 0)
     }
 }
