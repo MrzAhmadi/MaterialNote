@@ -5,7 +5,6 @@ import android.view.View
 import androidx.recyclerview.widget.RecyclerView
 
 class NoteListItemDecoration : RecyclerView.ItemDecoration() {
-
     private var position = -1
     private var itemCount = -1
 
