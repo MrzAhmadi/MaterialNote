@@ -255,3 +255,4 @@ gradle-app.setting
 
 /.idea/
 .idea\codeStyles
+/local.properties
