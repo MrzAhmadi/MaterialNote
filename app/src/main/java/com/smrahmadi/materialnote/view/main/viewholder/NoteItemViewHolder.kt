@@ -6,22 +6,28 @@ import android.view.View.GONE
 import android.view.View.VISIBLE
 import androidx.recyclerview.widget.RecyclerView
 import com.smrahmadi.materialnote.data.model.Note
+import com.smrahmadi.materialnote.view.main.call.NoteListCallback
 import kotlinx.android.synthetic.main.item_note.view.*
 
-class NoteItemViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+class NoteItemViewHolder(itemView: View, private var callback: NoteListCallback) : RecyclerView.ViewHolder(itemView) {
+
     fun bind(note: Note) {
         if (TextUtils.isEmpty(note.title))
             itemView.title.visibility = GONE
-        else{
+        else {
             itemView.title.text = note.title
             itemView.title.visibility = VISIBLE
         }
 
         if (TextUtils.isEmpty(note.description))
             itemView.description.visibility = GONE
-        else{
+        else {
             itemView.description.text = note.description
             itemView.description.visibility = VISIBLE
+        }
+
+        itemView.setOnClickListener {
+            callback.onItemClick(note)
         }
     }
 }

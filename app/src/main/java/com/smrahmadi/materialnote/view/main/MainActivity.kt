@@ -1,16 +1,21 @@
 package com.smrahmadi.materialnote.view.main
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
+import com.smrahmadi.materialnote.App.Companion.NOTE_KEY
 import com.smrahmadi.materialnote.R
+import com.smrahmadi.materialnote.data.model.Note
 import com.smrahmadi.materialnote.utils.NoteListItemDecoration
 import com.smrahmadi.materialnote.view.main.adapter.NoteListAdapter
+import com.smrahmadi.materialnote.view.main.call.NoteListCallback
+import com.smrahmadi.materialnote.view.note.NoteActivity
 import com.smrahmadi.materialnote.viewmodel.MainViewModel
 import kotlinx.android.synthetic.main.activity_main.*
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), NoteListCallback {
 
     private lateinit var liveData: MainViewModel
     private lateinit var adapter: NoteListAdapter
@@ -24,13 +29,28 @@ class MainActivity : AppCompatActivity() {
     private fun initView() {
         setContentView(R.layout.activity_main)
         noteList.addItemDecoration(NoteListItemDecoration(resources.getDimension(R.dimen.margin_8dp).toInt()))
+        addNote.setOnClickListener {
+            startNoteActivity(null)
+        }
     }
 
     private fun initList() {
-        adapter = NoteListAdapter()
+        adapter = NoteListAdapter(this)
         noteList.adapter = adapter
         liveData.allNotes.observe(this, Observer {
             adapter.setList(it)
-        }) }
+        })
+    }
+
+    override fun onItemClick(note: Note) {
+        startNoteActivity(note)
+    }
+
+    private fun startNoteActivity(note: Note?) {
+        val intent = Intent(this, NoteActivity::class.java)
+        if (note != null)
+            intent.putExtra(NOTE_KEY, note)
+        startActivity(intent)
+    }
 
 }
