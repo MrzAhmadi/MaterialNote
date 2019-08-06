@@ -3,4 +3,6 @@
   <dimen name="margin_8dp">8dp</dimen>
   <dimen name="titleTextSize">14sp</dimen>
   <dimen name="descriptionTextSize">12sp</dimen>
+  <dimen name="titleEditableTextSize">16sp</dimen>
+  <dimen name="descriptionEditableTextSize">14sp</dimen>
 </resources>

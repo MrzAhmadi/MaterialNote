@@ -2,4 +2,6 @@
   <string name="app_name">Material Note</string>
   <string name="title">Title</string>
   <string name="description">Description</string>
+  <string name="add">add</string>
+  <string name="insert_your_text">Insert your text</string>
 </resources>
