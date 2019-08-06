@@ -17,11 +17,11 @@ import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity(), NoteListCallback {
 
-    private lateinit var liveData: MainViewModel
+    private lateinit var viewModel: MainViewModel
     private lateinit var adapter: NoteListAdapter
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        liveData = ViewModelProviders.of(this).get(MainViewModel::class.java)
+        viewModel = ViewModelProviders.of(this).get(MainViewModel::class.java)
         initView()
         initList()
     }
@@ -37,7 +37,7 @@ class MainActivity : AppCompatActivity(), NoteListCallback {
     private fun initList() {
         adapter = NoteListAdapter(this)
         noteList.adapter = adapter
-        liveData.allNotes.observe(this, Observer {
+        viewModel.allNotes.observe(this, Observer {
             adapter.setList(it)
         })
     }
