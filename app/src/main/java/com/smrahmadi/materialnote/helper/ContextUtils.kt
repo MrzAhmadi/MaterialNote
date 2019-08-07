@@ -19,7 +19,7 @@ fun Context.showDeleteItemDialog(onPositiveClickListener: DialogInterface.OnClic
     alert.show()
 }
 
-fun Context.shoItemOptionsDialog(callback: ItemsOptionCallback) {
+fun Context.shoItemOptionsDialog(callback: ItemOptionsCallback) {
     val options = arrayOf(
         resources.getString(R.string.open),
         resources.getString(R.string.delete)
@@ -29,8 +29,9 @@ fun Context.shoItemOptionsDialog(callback: ItemsOptionCallback) {
     alert.setItems(options) { _, which ->
         callback.onDialogOptionClick(which)
     }
+    alert.show()
 }
 
-interface ItemsOptionCallback {
-    fun onDialogOptionClick(id: Int)
+interface ItemOptionsCallback {
+    fun onDialogOptionClick(item: Int)
 }
