@@ -3,6 +3,8 @@ package com.smrahmadi.materialnote.view.main
 import android.content.DialogInterface
 import android.content.Intent
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
@@ -13,6 +15,7 @@ import com.smrahmadi.materialnote.R
 import com.smrahmadi.materialnote.data.model.Note
 import com.smrahmadi.materialnote.helper.ItemOptionsCallback
 import com.smrahmadi.materialnote.helper.shoItemOptionsDialog
+import com.smrahmadi.materialnote.helper.showDeleteAllItemsDialog
 import com.smrahmadi.materialnote.helper.showDeleteItemDialog
 import com.smrahmadi.materialnote.utils.NoteListItemDecoration
 import com.smrahmadi.materialnote.view.main.adapter.NoteListAdapter
@@ -26,12 +29,17 @@ class MainActivity : AppCompatActivity(), NoteListCallback {
 
     private lateinit var viewModel: MainViewModel
     private lateinit var adapter: NoteListAdapter
+    private var deleteAll: MenuItem? = null
+
+    private var isNotEmptyList = false
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        viewModel = ViewModelProviders.of(this).get(MainViewModel::class.java)
         initView()
+        viewModel = ViewModelProviders.of(this).get(MainViewModel::class.java)
         initList()
     }
+
 
     private fun initView() {
         setContentView(R.layout.activity_main)
@@ -41,11 +49,33 @@ class MainActivity : AppCompatActivity(), NoteListCallback {
         }
     }
 
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.main, menu)
+        deleteAll = menu!!.findItem(R.id.deleteAll)
+        if (!isNotEmptyList)
+            deleteAll?.isVisible = false
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            R.id.deleteAll -> {
+                showDeleteAllItemsDialog(DialogInterface.OnClickListener { dialog, _ ->
+                    dialog.dismiss()
+                    viewModel.deleteAll()
+                })
+            }
+        }
+        return true
+    }
+
     private fun initList() {
         adapter = NoteListAdapter(this)
         noteList.adapter = adapter
         viewModel.allNotes.observe(this, Observer {
             adapter.setList(it)
+            deleteAll?.isVisible = it.isNotEmpty()
+            isNotEmptyList = it.isNotEmpty()
         })
     }
 

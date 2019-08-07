@@ -19,6 +19,14 @@ fun Context.showDeleteItemDialog(onPositiveClickListener: DialogInterface.OnClic
     alert.show()
 }
 
+fun Context.showDeleteAllItemsDialog(onPositiveClickListener: DialogInterface.OnClickListener) {
+    val alert = AlertDialog.Builder(this)
+    alert.setTitle(getString(R.string.do_you_want_delete_all_items))
+    alert.setNegativeButton(resources.getString(R.string.no), null)
+    alert.setPositiveButton(resources.getString(R.string.yes), onPositiveClickListener)
+    alert.show()
+}
+
 fun Context.shoItemOptionsDialog(callback: ItemOptionsCallback) {
     val options = arrayOf(
         resources.getString(R.string.open),

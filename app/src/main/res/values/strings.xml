@@ -5,9 +5,11 @@
   <string name="add">Add</string>
   <string name="insert_your_text">Insert your text</string>
   <string name="do_you_want_delete_this_item">Do you want delete this item?</string>
+  <string name="do_you_want_delete_all_items">Do you want delete all items?</string>
   <string name="no">No</string>
   <string name="yes">Yes</string>
   <string name="delete">Delete</string>
   <string name="choose_your_action">Choose your action</string>
   <string name="open">Open</string>
+  <string name="delete_all">Delete All</string>
 </resources>
