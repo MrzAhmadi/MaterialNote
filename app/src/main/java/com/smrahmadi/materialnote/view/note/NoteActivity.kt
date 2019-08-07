@@ -9,7 +9,7 @@ import androidx.lifecycle.ViewModelProviders
 import com.smrahmadi.materialnote.App.Companion.NOTE_KEY
 import com.smrahmadi.materialnote.R
 import com.smrahmadi.materialnote.data.model.Note
-import com.smrahmadi.materialnote.helper.showDeleteItemAlert
+import com.smrahmadi.materialnote.helper.showDeleteItemDialog
 import com.smrahmadi.materialnote.helper.toast
 import com.smrahmadi.materialnote.viewmodel.NoteViewModel
 import kotlinx.android.synthetic.main.activity_note.*
@@ -70,7 +70,7 @@ class NoteActivity : AppCompatActivity() {
             }
 
             R.id.delete -> {
-                showDeleteItemAlert(DialogInterface.OnClickListener { dialog, which ->
+                showDeleteItemDialog(DialogInterface.OnClickListener { dialog, _ ->
                     viewModel.delete(note!!)
                     dialog.dismiss()
                     finish()
