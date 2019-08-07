@@ -29,5 +29,11 @@ class NoteItemViewHolder(itemView: View, private var callback: NoteListCallback)
         itemView.setOnClickListener {
             callback.onItemClick(note)
         }
+
+        itemView.setOnLongClickListener {
+            callback.onItemLongClick(note)
+            true
+        }
+
     }
 }

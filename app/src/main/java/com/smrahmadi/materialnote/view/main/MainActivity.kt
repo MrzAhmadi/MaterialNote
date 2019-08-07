@@ -17,6 +17,7 @@ import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity(), NoteListCallback {
 
+
     private lateinit var viewModel: MainViewModel
     private lateinit var adapter: NoteListAdapter
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -42,15 +43,20 @@ class MainActivity : AppCompatActivity(), NoteListCallback {
         })
     }
 
-    override fun onItemClick(note: Note) {
-        startNoteActivity(note)
-    }
-
     private fun startNoteActivity(note: Note?) {
         val intent = Intent(this, NoteActivity::class.java)
         if (note != null)
             intent.putExtra(NOTE_KEY, note)
         startActivity(intent)
     }
+
+    override fun onItemClick(note: Note) {
+        startNoteActivity(note)
+    }
+
+    override fun onItemLongClick(note: Note) {
+
+    }
+
 
 }

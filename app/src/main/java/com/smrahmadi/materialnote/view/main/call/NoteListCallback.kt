@@ -4,4 +4,5 @@ import com.smrahmadi.materialnote.data.model.Note
 
 interface NoteListCallback {
     fun onItemClick(note: Note)
+    fun onItemLongClick(note: Note)
 }
