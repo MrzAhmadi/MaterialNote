@@ -8,4 +8,6 @@
   <string name="no">No</string>
   <string name="yes">Yes</string>
   <string name="delete">delete</string>
+  <string name="choose_your_action">Choose your action</string>
+  <string name="open">Open</string>
 </resources>
