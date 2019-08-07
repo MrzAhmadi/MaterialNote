@@ -33,7 +33,10 @@ abstract class NoteDatabase : RoomDatabase() {
                     super.onCreate(db)
                     ioThread {
                         val noteDao = getInstance(context).noteDao()
-                        val note = Note(title = "This is title", description = "This is Description")
+                        val note = Note(
+                            title = "What is Lorem Ipsum?",
+                            description = "Lorem Ipsum is simply dummy text of the printing and typesetting industry"
+                        )
                         runBlocking {
                             noteDao.insert(note)
                             noteDao.insert(note)
