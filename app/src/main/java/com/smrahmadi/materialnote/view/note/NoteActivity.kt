@@ -1,5 +1,6 @@
 package com.smrahmadi.materialnote.view.note
 
+import android.content.DialogInterface
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
@@ -8,6 +9,7 @@ import androidx.lifecycle.ViewModelProviders
 import com.smrahmadi.materialnote.App.Companion.NOTE_KEY
 import com.smrahmadi.materialnote.R
 import com.smrahmadi.materialnote.data.model.Note
+import com.smrahmadi.materialnote.helper.showDeleteItemAlert
 import com.smrahmadi.materialnote.helper.toast
 import com.smrahmadi.materialnote.viewmodel.NoteViewModel
 import kotlinx.android.synthetic.main.activity_note.*
@@ -19,27 +21,30 @@ class NoteActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        getNote()
         viewModel = ViewModelProviders.of(this).get(NoteViewModel::class.java)
         initView()
-        getNote()
-
     }
 
     private fun initView() {
         setContentView(R.layout.activity_note)
         title = null
-    }
-
-    private fun getNote() {
-        if (intent.extras != null && intent.hasExtra(NOTE_KEY)) {
-            note = intent.getParcelableExtra(NOTE_KEY)
+        if (note != null) {
             titleText.setText(note?.title)
             descriptionText.setText(note?.description)
         }
     }
 
+    private fun getNote() {
+        if (intent.extras != null && intent.hasExtra(NOTE_KEY)) {
+            note = intent.getParcelableExtra(NOTE_KEY)
+        }
+    }
+
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.note, menu)
+        val deleteItem = menu!!.findItem(R.id.delete)
+        deleteItem.isVisible = note != null
         return true
     }
 
@@ -62,6 +67,14 @@ class NoteActivity : AppCompatActivity() {
                     finish()
                 } else
                     toast(resources.getString(R.string.insert_your_text))
+            }
+
+            R.id.delete -> {
+                showDeleteItemAlert(DialogInterface.OnClickListener { dialog, which ->
+                    viewModel.delete(note!!)
+                    dialog.dismiss()
+                    finish()
+                })
             }
         }
         return true
