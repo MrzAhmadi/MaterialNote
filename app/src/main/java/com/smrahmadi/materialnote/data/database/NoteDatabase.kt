@@ -5,6 +5,7 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.sqlite.db.SupportSQLiteDatabase
+import com.smrahmadi.materialnote.R
 import com.smrahmadi.materialnote.data.dao.NoteDao
 import com.smrahmadi.materialnote.data.model.Note
 import kotlinx.coroutines.runBlocking
@@ -34,8 +35,9 @@ abstract class NoteDatabase : RoomDatabase() {
                     ioThread {
                         val noteDao = getInstance(context).noteDao()
                         val note = Note(
-                            title = "What is Lorem Ipsum?",
-                            description = "Lorem Ipsum is simply dummy text of the printing and typesetting industry"
+
+                            title = context.getString(R.string.lorem_ipsum_title),
+                            description = context.getString(R.string.lorem_ipsum_description)
                         )
                         runBlocking {
                             noteDao.insert(note)

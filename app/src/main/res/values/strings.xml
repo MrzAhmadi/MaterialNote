@@ -12,4 +12,6 @@
   <string name="choose_your_action">Choose your action</string>
   <string name="open">Open</string>
   <string name="delete_all">Delete All</string>
+  <string name="lorem_ipsum_title">What is Lorem Ipsum?</string>
+  <string name="lorem_ipsum_description">Lorem Ipsum is simply dummy text of the printing and typesetting industry</string>
 </resources>
