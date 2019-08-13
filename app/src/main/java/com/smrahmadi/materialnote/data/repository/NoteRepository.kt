@@ -3,8 +3,9 @@ package com.smrahmadi.materialnote.data.repository
 import androidx.annotation.WorkerThread
 import com.smrahmadi.materialnote.data.dao.NoteDao
 import com.smrahmadi.materialnote.data.model.Note
+import javax.inject.Inject
 
-class NoteRepository(private val noteDao: NoteDao) {
+class NoteRepository @Inject constructor(private val noteDao: NoteDao) {
 
     val allNotes = noteDao.getAll()
 

@@ -40,7 +40,6 @@ class MainActivity : AppCompatActivity(), NoteListCallback {
         initList()
     }
 
-
     private fun initView() {
         setContentView(R.layout.activity_main)
         noteList.addItemDecoration(NoteListItemDecoration(resources.getDimension(R.dimen.margin_8dp).toInt()))

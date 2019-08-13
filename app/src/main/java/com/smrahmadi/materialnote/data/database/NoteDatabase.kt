@@ -7,15 +7,19 @@ import androidx.room.RoomDatabase
 import androidx.sqlite.db.SupportSQLiteDatabase
 import com.smrahmadi.materialnote.R
 import com.smrahmadi.materialnote.data.dao.NoteDao
+import com.smrahmadi.materialnote.data.database.NoteDatabase.Companion.VERSION
 import com.smrahmadi.materialnote.data.model.Note
 import kotlinx.coroutines.runBlocking
 
-@Database(entities = [Note::class], version = 1)
+@Database(entities = [Note::class], version = VERSION)
 abstract class NoteDatabase : RoomDatabase() {
 
     abstract fun noteDao(): NoteDao
 
     companion object {
+
+        const val VERSION = 1
+
         private var INSTANCE: NoteDatabase? = null
 
         fun getInstance(context: Context): NoteDatabase =
