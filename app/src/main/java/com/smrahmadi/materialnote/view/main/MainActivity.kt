@@ -104,9 +104,7 @@ class MainActivity : AppCompatActivity(), NoteListCallback {
         startActivity(intent)
     }
 
-    override fun onItemClick(note: Note) {
-        startNoteActivity(note)
-    }
+    override fun onItemClick(note: Note) = startNoteActivity(note)
 
     override fun onItemLongClick(note: Note) {
         shoItemOptionsDialog(object : ItemOptionsCallback {
