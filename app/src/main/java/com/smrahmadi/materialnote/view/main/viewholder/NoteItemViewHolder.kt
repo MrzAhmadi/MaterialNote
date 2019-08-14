@@ -9,7 +9,10 @@ import com.smrahmadi.materialnote.data.model.Note
 import com.smrahmadi.materialnote.view.main.call.NoteListCallback
 import kotlinx.android.synthetic.main.item_note.view.*
 
-class NoteItemViewHolder(itemView: View, private var callback: NoteListCallback) : RecyclerView.ViewHolder(itemView) {
+class NoteItemViewHolder(
+    itemView: View,
+    private var callback: NoteListCallback
+) : RecyclerView.ViewHolder(itemView) {
 
     fun bind(note: Note) {
         if (TextUtils.isEmpty(note.title))
