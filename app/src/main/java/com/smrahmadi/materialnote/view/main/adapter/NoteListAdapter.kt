@@ -19,7 +19,7 @@ class NoteListAdapter(private var callback: NoteListCallback) : RecyclerView.Ada
     }
 
     override fun onBindViewHolder(holder: NoteItemViewHolder, position: Int) {
-        holder.bind(list.get(position))
+        holder.bind(list[position])
     }
 
     override fun getItemCount(): Int {
