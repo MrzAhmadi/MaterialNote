@@ -11,17 +11,13 @@ import dagger.Provides
 class RoomModule(var application: Application) {
 
     @Provides
-    fun providesRoomDatabase(): NoteDatabase {
-        return NoteDatabase.getInstance(application)
-    }
+    fun providesRoomDatabase() = NoteDatabase.getInstance(application)
 
     @Provides
-    fun providesNoteDao(noteDatabase: NoteDatabase): NoteDao {
-        return noteDatabase.noteDao()
-    }
+    fun providesNoteDao(noteDatabase: NoteDatabase) = noteDatabase.noteDao()
+
 
     @Provides
-    fun noteRepository(noteDao: NoteDao): NoteRepository {
-        return NoteRepository(noteDao)
-    }
+    fun noteRepository(noteDao: NoteDao) = NoteRepository(noteDao)
+
 }

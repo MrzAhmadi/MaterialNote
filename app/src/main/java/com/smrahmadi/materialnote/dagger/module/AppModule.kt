@@ -9,7 +9,6 @@ import dagger.Provides
 class AppModule(var application: Application) {
 
     @Provides
-    fun providesApplication(): Application {
-        return application
-    }
+    fun providesApplication() = application
+
 }
