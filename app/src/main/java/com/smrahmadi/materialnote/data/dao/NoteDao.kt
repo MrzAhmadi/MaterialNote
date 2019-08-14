@@ -6,6 +6,7 @@ import com.smrahmadi.materialnote.data.model.Note
 
 @Dao
 interface NoteDao {
+
     @Insert
     suspend fun insert(note: Note)
 
