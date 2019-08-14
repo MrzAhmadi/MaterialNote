@@ -10,8 +10,8 @@ class App : Application() {
     }
 
     companion object {
-        private var instance: App? = null
 
+        private var instance: App? = null
 
         const val NOTE_KEY = "note"
         const val OPEN_OPTION = 0
