@@ -8,13 +8,22 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProviders
 import com.smrahmadi.materialnote.App.Companion.NOTE_KEY
 import com.smrahmadi.materialnote.R
+import com.smrahmadi.materialnote.dagger.component.DaggerAppComponent
+import com.smrahmadi.materialnote.dagger.module.AppModule
+import com.smrahmadi.materialnote.dagger.module.RoomModule
 import com.smrahmadi.materialnote.data.model.Note
+import com.smrahmadi.materialnote.data.repository.NoteRepository
 import com.smrahmadi.materialnote.helper.showDeleteItemDialog
 import com.smrahmadi.materialnote.helper.toast
+import com.smrahmadi.materialnote.viewmodel.DatabaseViewModel
 import com.smrahmadi.materialnote.viewmodel.NoteViewModel
 import kotlinx.android.synthetic.main.activity_note.*
+import javax.inject.Inject
 
 class NoteActivity : AppCompatActivity() {
+
+    @Inject
+    lateinit var noteRepository: NoteRepository
 
     private lateinit var viewModel: NoteViewModel
     private var note: Note? = null
@@ -22,7 +31,17 @@ class NoteActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         getNote()
-        viewModel = ViewModelProviders.of(this).get(NoteViewModel::class.java)
+
+        DaggerAppComponent.builder()
+            .appModule(AppModule(application))
+            .roomModule(RoomModule(application))
+            .build()
+            .inject(this)
+
+        viewModel = ViewModelProviders
+            .of(this, DatabaseViewModel(noteRepository))
+            .get(NoteViewModel::class.java)
+
         initView()
     }
 

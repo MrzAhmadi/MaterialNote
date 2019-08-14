@@ -12,7 +12,11 @@ import com.smrahmadi.materialnote.App.Companion.DELETE_OPTION
 import com.smrahmadi.materialnote.App.Companion.NOTE_KEY
 import com.smrahmadi.materialnote.App.Companion.OPEN_OPTION
 import com.smrahmadi.materialnote.R
+import com.smrahmadi.materialnote.dagger.component.DaggerAppComponent
+import com.smrahmadi.materialnote.dagger.module.AppModule
+import com.smrahmadi.materialnote.dagger.module.RoomModule
 import com.smrahmadi.materialnote.data.model.Note
+import com.smrahmadi.materialnote.data.repository.NoteRepository
 import com.smrahmadi.materialnote.helper.ItemOptionsCallback
 import com.smrahmadi.materialnote.helper.shoItemOptionsDialog
 import com.smrahmadi.materialnote.helper.showDeleteAllItemsDialog
@@ -21,11 +25,16 @@ import com.smrahmadi.materialnote.utils.NoteListItemDecoration
 import com.smrahmadi.materialnote.view.main.adapter.NoteListAdapter
 import com.smrahmadi.materialnote.view.main.call.NoteListCallback
 import com.smrahmadi.materialnote.view.note.NoteActivity
+import com.smrahmadi.materialnote.viewmodel.DatabaseViewModel
 import com.smrahmadi.materialnote.viewmodel.MainViewModel
 import kotlinx.android.synthetic.main.activity_main.*
+import javax.inject.Inject
 
 class MainActivity : AppCompatActivity(), NoteListCallback {
 
+
+    @Inject
+    lateinit var noteRepository: NoteRepository
 
     private lateinit var viewModel: MainViewModel
     private lateinit var adapter: NoteListAdapter
@@ -36,7 +45,17 @@ class MainActivity : AppCompatActivity(), NoteListCallback {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         initView()
-        viewModel = ViewModelProviders.of(this).get(MainViewModel::class.java)
+
+        DaggerAppComponent.builder()
+            .appModule(AppModule(application))
+            .roomModule(RoomModule(application))
+            .build()
+            .inject(this)
+
+        viewModel = ViewModelProviders
+            .of(this, DatabaseViewModel(noteRepository))
+            .get(MainViewModel::class.java)
+
         initList()
     }
 
