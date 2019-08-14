@@ -30,7 +30,8 @@ class NoteActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        getNote()
+
+        note = intent.getParcelableExtra(NOTE_KEY)
 
         DaggerAppComponent.builder()
             .appModule(AppModule(application))
@@ -51,12 +52,6 @@ class NoteActivity : AppCompatActivity() {
         if (note != null) {
             titleText.setText(note?.title)
             descriptionText.setText(note?.description)
-        }
-    }
-
-    private fun getNote() {
-        if (intent.extras != null && intent.hasExtra(NOTE_KEY)) {
-            note = intent.getParcelableExtra(NOTE_KEY)
         }
     }
 
