@@ -8,3 +8,7 @@ Made by this common practices :
 - [x] Room
 - [x] Dependency Injection(Dagger2)
 
+
+
+![Farmers Market Finder Demo](screenshot/motion.gif)
+
