@@ -10,13 +10,18 @@ import com.smrahmadi.materialnote.data.dao.NoteDao
 import com.smrahmadi.materialnote.data.database.NoteDatabase.Companion.VERSION
 import com.smrahmadi.materialnote.data.model.Note
 import kotlinx.coroutines.runBlocking
+import org.jetbrains.anko.AnkoLogger
+import org.jetbrains.anko.verbose
 
 @Database(entities = [Note::class], version = VERSION)
-abstract class NoteDatabase : RoomDatabase() {
+abstract class NoteDatabase : RoomDatabase(), AnkoLogger {
 
     abstract fun noteDao(): NoteDao
 
     companion object {
+
+        private val log = AnkoLogger(this.javaClass)
+        private val logWithASpecificTag = AnkoLogger("NoteDatabase")
 
         const val VERSION = 1
 
@@ -36,6 +41,7 @@ abstract class NoteDatabase : RoomDatabase() {
             return object : Callback() {
                 override fun onCreate(db: SupportSQLiteDatabase) {
                     super.onCreate(db)
+                    log.verbose { "Create" }
                     ioThread {
                         val noteDao = getInstance(context).noteDao()
                         val note = Note(
@@ -49,6 +55,11 @@ abstract class NoteDatabase : RoomDatabase() {
                             noteDao.insert(note)
                         }
                     }
+                }
+
+                override fun onOpen(db: SupportSQLiteDatabase) {
+                    super.onOpen(db)
+                    log.verbose { "Open" }
                 }
             }
         }
