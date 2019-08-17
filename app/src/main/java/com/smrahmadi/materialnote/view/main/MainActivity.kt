@@ -1,6 +1,5 @@
 package com.smrahmadi.materialnote.view.main
 
-import android.content.DialogInterface
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
@@ -16,7 +15,6 @@ import com.smrahmadi.materialnote.dagger.module.AppModule
 import com.smrahmadi.materialnote.dagger.module.RoomModule
 import com.smrahmadi.materialnote.data.model.Note
 import com.smrahmadi.materialnote.data.repository.NoteRepository
-import com.smrahmadi.materialnote.helper.showDeleteAllItemsDialog
 import com.smrahmadi.materialnote.utils.NoteListItemDecoration
 import com.smrahmadi.materialnote.view.main.adapter.NoteListAdapter
 import com.smrahmadi.materialnote.view.main.call.NoteListCallback
@@ -75,10 +73,12 @@ class MainActivity : AppCompatActivity(), NoteListCallback {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.deleteAll -> {
-                showDeleteAllItemsDialog(DialogInterface.OnClickListener { dialog, _ ->
-                    dialog.dismiss()
-                    viewModel.deleteAll()
-                })
+                alert(getString(R.string.do_you_want_delete_all_items), null) {
+                    yesButton {
+                        viewModel.deleteAll()
+                    }
+                    noButton {}
+                }.show()
             }
         }
         return true
