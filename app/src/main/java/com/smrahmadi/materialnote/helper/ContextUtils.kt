@@ -7,7 +7,7 @@ import androidx.appcompat.app.AlertDialog
 import com.smrahmadi.materialnote.R
 
 
-fun Context.toast(text: String) {
+fun Context.showToast(text: String) {
     Toast.makeText(this, text, Toast.LENGTH_SHORT).show()
 }
 
