@@ -1,4 +1,4 @@
-# MaterialNote
+# Material Note
 Simple note application 
 
 Made by this common practices :
