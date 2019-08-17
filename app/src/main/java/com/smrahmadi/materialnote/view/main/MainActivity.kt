@@ -16,10 +16,7 @@ import com.smrahmadi.materialnote.dagger.module.AppModule
 import com.smrahmadi.materialnote.dagger.module.RoomModule
 import com.smrahmadi.materialnote.data.model.Note
 import com.smrahmadi.materialnote.data.repository.NoteRepository
-import com.smrahmadi.materialnote.helper.ItemOptionsCallback
-import com.smrahmadi.materialnote.helper.shoItemOptionsDialog
 import com.smrahmadi.materialnote.helper.showDeleteAllItemsDialog
-import com.smrahmadi.materialnote.helper.showDeleteItemDialog
 import com.smrahmadi.materialnote.utils.NoteListItemDecoration
 import com.smrahmadi.materialnote.view.main.adapter.NoteListAdapter
 import com.smrahmadi.materialnote.view.main.call.NoteListCallback
@@ -27,7 +24,7 @@ import com.smrahmadi.materialnote.view.note.NoteActivity
 import com.smrahmadi.materialnote.viewmodel.DatabaseViewModel
 import com.smrahmadi.materialnote.viewmodel.MainViewModel
 import kotlinx.android.synthetic.main.activity_main.*
-import org.jetbrains.anko.startActivity
+import org.jetbrains.anko.*
 import javax.inject.Inject
 
 class MainActivity : AppCompatActivity(), NoteListCallback {
@@ -106,19 +103,20 @@ class MainActivity : AppCompatActivity(), NoteListCallback {
     override fun onItemClick(note: Note) = startNoteActivity(note)
 
     override fun onItemLongClick(note: Note) {
-        shoItemOptionsDialog(object : ItemOptionsCallback {
-            override fun onDialogOptionClick(item: Int) {
-                when (item) {
-                    OPEN_OPTION -> startNoteActivity(note)
-                    DELETE_OPTION -> {
-                        showDeleteItemDialog(DialogInterface.OnClickListener { dialog, _ ->
-                            dialog.dismiss()
+        val options = listOf(getString(R.string.open), getString(R.string.delete))
+        selector(getString(R.string.choose_your_action), options) { _, i ->
+            when (i) {
+                OPEN_OPTION -> startNoteActivity(note)
+                DELETE_OPTION -> {
+                    alert(getString(R.string.do_you_want_delete_this_item), null) {
+                        yesButton {
                             viewModel.delete(note)
-                        })
-                    }
+                        }
+                        noButton {}
+                    }.show()
                 }
             }
-        })
+        }
     }
 
 }
