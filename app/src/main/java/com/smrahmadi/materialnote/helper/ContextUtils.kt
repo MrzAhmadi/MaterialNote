@@ -6,11 +6,12 @@ import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import com.smrahmadi.materialnote.R
 
-
+@Deprecated("showToast")
 fun Context.showToast(text: String) {
     Toast.makeText(this, text, Toast.LENGTH_SHORT).show()
 }
 
+@Deprecated("showDeleteItemDialog")
 fun Context.showDeleteItemDialog(onPositiveClickListener: DialogInterface.OnClickListener) {
     val alert = AlertDialog.Builder(this)
     alert.setTitle(getString(R.string.do_you_want_delete_this_item))
@@ -19,6 +20,7 @@ fun Context.showDeleteItemDialog(onPositiveClickListener: DialogInterface.OnClic
     alert.show()
 }
 
+@Deprecated("showDeleteAllItemsDialog")
 fun Context.showDeleteAllItemsDialog(onPositiveClickListener: DialogInterface.OnClickListener) {
     val alert = AlertDialog.Builder(this)
     alert.setTitle(getString(R.string.do_you_want_delete_all_items))
@@ -27,6 +29,7 @@ fun Context.showDeleteAllItemsDialog(onPositiveClickListener: DialogInterface.On
     alert.show()
 }
 
+@Deprecated("shoItemOptionsDialog")
 fun Context.shoItemOptionsDialog(callback: ItemOptionsCallback) {
     val options = arrayOf(
         resources.getString(R.string.open),
