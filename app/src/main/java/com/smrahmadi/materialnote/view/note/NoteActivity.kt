@@ -14,10 +14,10 @@ import com.smrahmadi.materialnote.dagger.module.RoomModule
 import com.smrahmadi.materialnote.data.model.Note
 import com.smrahmadi.materialnote.data.repository.NoteRepository
 import com.smrahmadi.materialnote.helper.showDeleteItemDialog
-import com.smrahmadi.materialnote.helper.toast
 import com.smrahmadi.materialnote.viewmodel.DatabaseViewModel
 import com.smrahmadi.materialnote.viewmodel.NoteViewModel
 import kotlinx.android.synthetic.main.activity_note.*
+import org.jetbrains.anko.toast
 import javax.inject.Inject
 
 class NoteActivity : AppCompatActivity() {
@@ -80,7 +80,7 @@ class NoteActivity : AppCompatActivity() {
                     }
                     finish()
                 } else
-                    toast(resources.getString(R.string.insert_your_text))
+                    toast(R.string.insert_your_text)
             }
 
             R.id.delete -> {
