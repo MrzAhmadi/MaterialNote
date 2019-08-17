@@ -1,6 +1,5 @@
 package com.smrahmadi.materialnote.view.note
 
-import android.content.DialogInterface
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
@@ -13,11 +12,13 @@ import com.smrahmadi.materialnote.dagger.module.AppModule
 import com.smrahmadi.materialnote.dagger.module.RoomModule
 import com.smrahmadi.materialnote.data.model.Note
 import com.smrahmadi.materialnote.data.repository.NoteRepository
-import com.smrahmadi.materialnote.helper.showDeleteItemDialog
 import com.smrahmadi.materialnote.viewmodel.DatabaseViewModel
 import com.smrahmadi.materialnote.viewmodel.NoteViewModel
 import kotlinx.android.synthetic.main.activity_note.*
+import org.jetbrains.anko.alert
+import org.jetbrains.anko.noButton
 import org.jetbrains.anko.toast
+import org.jetbrains.anko.yesButton
 import javax.inject.Inject
 
 class NoteActivity : AppCompatActivity() {
@@ -84,11 +85,14 @@ class NoteActivity : AppCompatActivity() {
             }
 
             R.id.delete -> {
-                showDeleteItemDialog(DialogInterface.OnClickListener { dialog, _ ->
-                    viewModel.delete(note!!)
-                    dialog.dismiss()
-                    finish()
-                })
+                alert(getString(R.string.do_you_want_delete_this_item), null) {
+                    yesButton {
+                        viewModel.delete(note!!)
+                        finish()
+                    }
+                    noButton {}
+                }.show()
+
             }
         }
         return true
