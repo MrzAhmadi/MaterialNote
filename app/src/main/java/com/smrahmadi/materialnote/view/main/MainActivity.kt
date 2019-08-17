@@ -1,7 +1,6 @@
 package com.smrahmadi.materialnote.view.main
 
 import android.content.DialogInterface
-import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
@@ -28,6 +27,7 @@ import com.smrahmadi.materialnote.view.note.NoteActivity
 import com.smrahmadi.materialnote.viewmodel.DatabaseViewModel
 import com.smrahmadi.materialnote.viewmodel.MainViewModel
 import kotlinx.android.synthetic.main.activity_main.*
+import org.jetbrains.anko.startActivity
 import javax.inject.Inject
 
 class MainActivity : AppCompatActivity(), NoteListCallback {
@@ -98,10 +98,9 @@ class MainActivity : AppCompatActivity(), NoteListCallback {
     }
 
     private fun startNoteActivity(note: Note?) {
-        val intent = Intent(this, NoteActivity::class.java)
-        if (note != null)
-            intent.putExtra(NOTE_KEY, note)
-        startActivity(intent)
+        startActivity<NoteActivity>(
+            NOTE_KEY to note
+        )
     }
 
     override fun onItemClick(note: Note) = startNoteActivity(note)
